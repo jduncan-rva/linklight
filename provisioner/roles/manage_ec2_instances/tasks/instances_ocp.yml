@@ -104,7 +104,7 @@
     resource: "{{item.1}}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{item.0 + 1}}-node2"
+      Name: "{{ ec2_name_prefix }}-student{{item.0 + 1}}-infra"
       Workshop_node2: "{{ec2_name_prefix}}-node2"
       Workshop: "{{ec2_name_prefix}}"
       Index: "{{ item[0] }}"

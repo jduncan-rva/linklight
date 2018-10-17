@@ -54,5 +54,5 @@
 
 - name: Generate instructor inventory
   template:
-    src: instructor_inventory.j2
+    src: ocp_instructor_inventory.j2
     dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/instructor_inventory.txt"

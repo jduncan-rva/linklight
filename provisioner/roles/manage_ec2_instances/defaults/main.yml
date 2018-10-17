@@ -34,6 +34,12 @@ multivendor:
   rtr3: junos-byol
   rtr4: junos-byol
 
+ec2_ocp:
+  master: ocp-master
+  infra: ocp-master
+  app1: ocp-app
+  app2: ocp-app
+
 # Instance types used for lab configurations
 ec2_instance_types:
   junos-byol:
@@ -78,6 +84,22 @@ ec2_instance_types:
     disk_space: 40
     architecture: x86_64
     filter: 'F5 Networks Prelicensed Hourly BIGIP-13.1*Good 25MBPS*'
+
+  ocp-master:
+    owners: 309956199498
+    size: m4.xlarge
+    os_type: linux
+    disk_space: 20
+    architecture: x86_64
+    filter: 'RHEL-7.4*GA*'
+
+  ocp-app:
+    owners: 309956199498
+    size: m4.large
+    os_type: linux
+    disk_space: 20
+    architecture: x86_64
+    filter: 'RHEL-7.4*GA*'
 
 # Login names used for SSH connections. These are baked in to the AMIs.
 ec2_login_names:

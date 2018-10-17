@@ -78,21 +78,24 @@
   when:
     - not networking
     - not f5workshop
+    - not openshift
 
 - name: provision ansible networking workshop instances
   include_tasks: instances_networking.yml
   when:
     - networking
     - not f5workshop
+    - not openshift
 
 - name: provision ansible f5 workshop instances
   include_tasks: instances_f5.yml
   when:
     - f5workshop
     - not networking
+    - not openshift 
 
 - name: provision openshift instances
   include_tasks: instances_ocp.yml
   when:
     - openshift
-    - not networking 
+    - not networking

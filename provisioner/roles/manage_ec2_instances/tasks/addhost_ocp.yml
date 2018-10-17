@@ -1,0 +1,58 @@
+- name: grab facts for master node
+  ec2_instance_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Workshop_master": "{{ec2_name_prefix}}-master"
+  register: master_node_facts
+
+- name: grab facts for infra node
+  ec2_instance_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Workshop_infra": "{{ec2_name_prefix}}-infra"
+  register: infra_node_facts
+
+  - name: grab facts for app1 node
+    ec2_instance_facts:
+      region: "{{ ec2_region }}"
+      filters:
+        instance-state-name: running
+        "tag:Workshop_app1": "{{ec2_name_prefix}}-app1"
+    register: app1_node_facts
+
+  - name: grab facts for app2 node
+    ec2_instance_facts:
+      region: "{{ ec2_region }}"
+      filters:
+        instance-state-name: running
+        "tag:Workshop_app2": "{{ec2_name_prefix}}-app2"
+    register: app2_node_facts
+
+- name: add hosts to groups (ANSIBLE ESSENTIALS MODE)
+  add_host:
+    name: "{{ item.tags.Name }}"
+    short_name: "{{ item.tags.short_name }}"
+    ansible_host: "{{ item.public_ip_address }}"
+    ansible_user: "{{ ec2_login_names[node1_node] }}"
+    ansible_port: "{{ ssh_port }}"
+    ansible_ssh_private_key_file: "{{ playbook_dir }}/{{ec2_name_prefix}}/{{ec2_name_prefix}}-private.pem"
+    groups: lab_hosts,managed_nodes
+  with_items:
+    - "{{ master_node_facts.instances }}"
+    - "{{ infra_node_facts.instances }}"
+    - "{{ app1_node_facts.instances }}"
+    - "{{ app2_node_facts.instances }}"
+  changed_when: no
+
+- name: Generate student inventories
+  template:
+    src: instances.txt.j2
+    dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/student{{item}}-instances.txt"
+  with_sequence: count="{{ student_total }}"
+
+- name: Generate instructor inventory
+  template:
+    src: instructor_inventory.j2
+    dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/instructor_inventory.txt"

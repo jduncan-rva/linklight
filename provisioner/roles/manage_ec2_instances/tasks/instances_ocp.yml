@@ -105,7 +105,7 @@
     state: present
     tags:
       Name: "{{ ec2_name_prefix }}-student{{item.0 + 1}}-infra"
-      Workshop_node2: "{{ec2_name_prefix}}-node2"
+      Workshop_infra: "{{ec2_name_prefix}}-infra"
       Workshop: "{{ec2_name_prefix}}"
       Index: "{{ item[0] }}"
       Student: "student{{item.0 + 1}}"
@@ -163,7 +163,7 @@
     state: present
     tags:
       Name: "{{ ec2_name_prefix }}-student{{item.0 + 1}}-app1"
-      Workshop_node3: "{{ec2_name_prefix}}-app1"
+      Workshop_app1: "{{ec2_name_prefix}}-app1"
       Workshop: "{{ec2_name_prefix}}"
       Index: "{{ item[0] }}"
       Student: "student{{item.0 + 1}}"
@@ -221,7 +221,7 @@
     state: present
     tags:
       Name: "{{ ec2_name_prefix }}-student{{item.0 + 1}}-app2"
-      Workshop_node3: "{{ec2_name_prefix}}-app2"
+      Workshop_app2: "{{ec2_name_prefix}}-app2"
       Workshop: "{{ec2_name_prefix}}"
       Index: "{{ item[0] }}"
       Student: "student{{item.0 + 1}}"

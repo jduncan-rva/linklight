@@ -25,16 +25,22 @@
   when:
     - not networking
     - not f5workshop
+    - not openshift
 
 - name: networking mode - setup inventory
   include_tasks: "addhost_networking.yml"
   when:
     - networking
     - not f5workshop
+    - not openshift
 
 - name: f5 mode - setup inventory
   include_tasks: "addhost_f5.yml"
   when: f5workshop
+
+- name: openshift mode - setup inventory
+  include_tasks: "addhost_ocp.yml"
+  when: openshift 
 
 # - name: debug what this next task is doing
 #   debug:

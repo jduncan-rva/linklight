@@ -89,7 +89,7 @@ ec2_instance_types:
     owners: 309956199498
     size: m4.xlarge
     os_type: linux
-    disk_space: 20
+    disk_space: 40
     architecture: x86_64
     filter: 'RHEL-7.4*GA*'
 
@@ -97,7 +97,7 @@ ec2_instance_types:
     owners: 309956199498
     size: m4.large
     os_type: linux
-    disk_space: 20
+    disk_space: 40
     architecture: x86_64
     filter: 'RHEL-7.4*GA*'
 

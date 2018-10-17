@@ -90,3 +90,9 @@
   when:
     - f5workshop
     - not networking
+
+- name: provision openshift instances
+  include_tasks: instances_ocp.yml
+  when:
+    - openshift
+    - not networking 

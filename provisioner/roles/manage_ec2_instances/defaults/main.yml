@@ -113,3 +113,5 @@ ec2_login_names:
   junos-byol: jnpr
   f5-prelicensed: admin
   f5_hosts: ec2-user
+  ocp-master: ec2-user
+  ocp-app: ec2-user

@@ -30,7 +30,7 @@
         "tag:Workshop_app2": "{{ec2_name_prefix}}-app2"
     register: app2_node_facts
 
-- name: add hosts to groups (ANSIBLE ESSENTIALS MODE)
+- name: add hosts to groups (OPENSHIFT MODE)
   add_host:
     name: "{{ item.tags.Name }}"
     short_name: "{{ item.tags.short_name }}"

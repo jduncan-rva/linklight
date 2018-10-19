@@ -1,4 +1,4 @@
 ---
 # defaults file for host_prep_commmon
 
-provision_type: ""
+provision_type: "aws"

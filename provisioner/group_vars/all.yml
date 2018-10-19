@@ -2,6 +2,8 @@ networking: false
 f5workshop: false
 admin_password: ansible
 
+provision_type: aws
+
 openshift_public_hostname: "{{ cluster_name }}.{{ openshift_base_domain }}"
 cluster_name_verbose: "{{ openshift_public_hostname | replace('.', '-') }}"
 cluster_group_name: "{{ cluster_name_verbose | replace('-', '_') }}"

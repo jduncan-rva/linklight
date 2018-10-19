@@ -34,7 +34,6 @@
       - git
       - wget
       - sshpass
-      - python-pip
       - ansible
     state: latest
 

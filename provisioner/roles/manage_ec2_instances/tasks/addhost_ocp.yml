@@ -57,7 +57,7 @@
 - name: Generate student OpenShift inventories
   template:
     src: ocp_inventory_{{ openshift_version }}.j2
-    dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/student{{item}}-inventory.txt"
+    dest: /etc/ansible/hosts
   with_sequence: count="{{ student_total }}"
 
 - name: Generate instructor inventory

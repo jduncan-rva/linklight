@@ -55,7 +55,7 @@
 
 - name: Put student inventory in proper spot
   copy:
-    src: ./{{ec2_name_prefix}}/{{ username }}-iventory.txt
+    src: ./{{ec2_name_prefix}}/{{ username }}-inventory.txt
     dest: /etc/ansible/hosts'
     owner: "{{ username }}"
     group: "{{ username }}"

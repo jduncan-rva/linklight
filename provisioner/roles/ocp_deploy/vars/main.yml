@@ -1,0 +1,8 @@
+---
+
+cluster_type: multi
+
+cns_storage_device: /dev/xvdb
+cns_block_host_volume_size: 50
+
+openshift_registry_volume_size: 20

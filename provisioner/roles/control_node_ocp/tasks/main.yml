@@ -28,6 +28,8 @@
 - name: Install base packages
   yum:
     name:
+      - atomic-openshift-utils
+      - openshift-ansible
       - vim-enhanced
       - git
       - wget

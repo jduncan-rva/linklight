@@ -12,8 +12,6 @@
           - ansible_version.major >= 2
           - ansible_version.minor >= 6
 
-
-
       # F5workshop and networking workshop are two different workshops
     - name: make sure f5workshop is not turned on when networking is
       assert:
@@ -77,6 +75,12 @@
   gather_facts: no
   roles:
     - connectivity_test
+
+- name: Set up SSH access for OpenShift deploy
+  hosts: control_nodes
+  become: yes
+  roles:
+    - { role: users_ocp, when: openshift }
 
 - name: Configure common options on managed nodes and control nodes
   hosts: "managed_nodes:control_nodes"

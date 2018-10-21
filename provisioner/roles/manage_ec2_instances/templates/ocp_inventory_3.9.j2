@@ -167,7 +167,6 @@ openshift_hosted_router_selector='role=infra'
 # Router certificate (optional)
 # Provide local certificate paths which will be configured as the
 # router's default certificate.
-# openshift_hosted_router_certificate={"certfile": "/etc/letsencrypt/live/apps.{{ openshift_public_hostname }}/cert.pem", "keyfile": "/etc/letsencrypt/live/apps.{{ openshift_public_hostname }}/privkey.pem", "cafile": "/etc/letsencrypt/live/apps.{{ openshift_public_hostname }}/chain.pem"}
 
 # Openshift Registry Options
 #
@@ -249,7 +248,6 @@ openshift_master_overwrite_named_certificates=true
 #openshift_master_named_certificates=[{"certfile": "/path/to/custom1.crt", "keyfile": "/path/to/custom1.key", "cafile": "/path/to/custom-ca1.crt"}]
 #
 # Detected names may be overridden by specifying the "names" key
-openshift_master_named_certificates=[{"certfile": "/etc/letsencrypt/live/{{ openshift_public_hostname }}/fullchain.pem", "keyfile": "/etc/letsencrypt/live/{{ openshift_public_hostname }}/privkey.pem", "names": ["{{ openshift_public_hostname }}"]}]
 
 # Enable service catalog
 openshift_enable_service_catalog=true

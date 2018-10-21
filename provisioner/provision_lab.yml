@@ -100,6 +100,8 @@
 - name: CONFIGURE CONTROL NODE
   hosts: control_nodes
   become: yes
+  vars:
+    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
   roles:
     - { role: control_node, when: not openshift }
     - { role: control_node_ocp, when: openshift}

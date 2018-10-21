@@ -8,3 +8,19 @@
     owner: "{{ openshift_ec2_user }}"
     group: "{{ openshift_ec2_user }}"
     mode: 0400
+
+- name: copy ssh config to the bastion host
+  template:
+    src: ssh_config
+    dest: "/home/{{ openshift_ec2_user }}"/.ssh/config
+    owner: "{{ openshift_ec2_user }}"
+    group: "{{ openshift_ec2_user }}"
+    mode: 0400
+
+- name: copy ansible config to the bastion host
+  template:
+    src: ansible_config
+    dest: "/home/{{ openshift_ec2_user }}"/.ssh/config
+    owner: "{{ openshift_ec2_user }}"
+    group: "{{ openshift_ec2_user }}"
+    mode: 0600

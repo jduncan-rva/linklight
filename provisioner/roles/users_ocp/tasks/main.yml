@@ -20,7 +20,7 @@
 - name: copy ansible config to the bastion host
   template:
     src: ansible_config
-    dest: "/home/{{ openshift_ec2_user }}/.ssh/config"
+    dest: "/home/{{ openshift_ec2_user }}/.ansible/config"
     owner: "{{ openshift_ec2_user }}"
     group: "{{ openshift_ec2_user }}"
     mode: 0600

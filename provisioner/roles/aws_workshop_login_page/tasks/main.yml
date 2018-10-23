@@ -2,7 +2,13 @@
   template:
     src: ./templates/index.html.j2
     dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-index.html"
-  when: s3_state == 'present'
+  when: s3_state == 'present' and not openshift
+
+- name: create student OpenShift webpage
+  template:
+    src: ./templates/index.html.j2
+    dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-index.html"
+  when: s3_state == 'present' and openshift   
 
 - name: create s3 bucket
   s3_bucket:

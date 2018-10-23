@@ -296,11 +296,11 @@ $("document").ready(function(){
     <div class="content">
 {% for host in ansible_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-To login to the <code>ansible</code> OpenShift control plane node use the following for SSH access:<br>
+{% if host.tags.short_name == 'master' %}
+To log into your OpenShift cluster, browse to https://{{ host.public_hostname }}
 username:   student{{number}}<br>
 password:   {{admin_password}}<br>
-IP Address: {{ host.public_ip_address }}<br>
-<pre><code>ssh student{{number}}@{{ host.public_ip_address }}</code></pre><br>
+{% endif %}
 {% endif %}
 {% endfor %}
     </div>

@@ -40,7 +40,3 @@
     sleep: 5
     delay: 5
     timeout: 300
-
-- name: Wait 30 seconds for systems to become available 
-  pause:
-    seconds: 30

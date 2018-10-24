@@ -103,7 +103,8 @@
   roles:
     - { role: control_node, when: not openshift }
     - { role: control_node_ocp, when: openshift}
-    # - { role: ocp_deploy, when: openshift }
+    - { role: ocp_deploy, when: openshift }
+    - { role: addusers_ocp, when: openshift }
   tags: control_node
 
 - name: Setup Amazon S3 Website for Student Login

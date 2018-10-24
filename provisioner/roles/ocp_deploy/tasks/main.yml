@@ -24,6 +24,16 @@
 #     backup: yes
 #   become: yes
 
+- name: restart dbus
+  service:
+    name: dbus
+    state: restarted
+
+- name: start up dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted
+
 - name: Run OpenShift prerequisites
   command: ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
   become: no

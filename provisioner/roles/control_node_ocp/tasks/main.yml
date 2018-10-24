@@ -2,34 +2,39 @@
 # There is a current bug with DNSmasq causing things to fail during an
 # OpenShift install. Installing/upgrading and then rebooting the nodes is
 # the current workaround.
-- name: Install/upgrade dnsmasq
-  yum:
-    name: dnsmasq
-    state: latest
-  register: install_update_dnsmasq
-  become: yes
-
-- block:
-    - name: Reboot host
-      shell: sleep 5 && shutdown -r now
-      async: 30
-      poll: 0
-      ignore_errors: yes
-      become: yes
-
-    - name: Wait for nodes to reboot
-      wait_for_connection:
-        connect_timeout: 20
-        sleep: 5
-        delay: 5
-        timeout: 300
-  when: install_update_dnsmasq.changed
+# - name: Install/upgrade dnsmasq
+#   yum:
+#     name: dnsmasq
+#     state: latest
+#   register: install_update_dnsmasq
+#   become: yes
+#
+# - block:
+#     - name: Reboot host
+#       shell: sleep 5 && shutdown -r now
+#       async: 30
+#       poll: 0
+#       ignore_errors: yes
+#       become: yes
+#
+#     - name: Wait for nodes to reboot
+#       wait_for_connection:
+#         connect_timeout: 20
+#         sleep: 5
+#         delay: 5
+#         timeout: 300
+#   when: install_update_dnsmasq.changed
 
 - name: Install required packages (3.9)
   yum:
     name:
       - atomic-openshift-utils
       - docker-1.13.1
+      - vim-enhanced
+      - git
+      - wget
+      - sshpass
+      - ansible
     state: present
   when: (openshift_version | string) == "3.9"
   become: yes
@@ -39,6 +44,11 @@
     name:
       - openshift-ansible
       - docker-1.13.1
+      - vim-enhanced
+      - git
+      - wget
+      - sshpass
+      - ansible
     state: present
   when: (openshift_version | string) == "3.10"
   become: yes
@@ -48,19 +58,14 @@
     name:
       - openshift-ansible
       - docker-1.13.1
-    state: present
-  when: (openshift_version | string) == "3.11"
-  become: yes
-
-- name: Install base packages
-  yum:
-    name:
       - vim-enhanced
       - git
       - wget
       - sshpass
       - ansible
-    state: latest
+    state: present
+  when: (openshift_version | string) == "3.11"
+  become: yes
 
 # - name: Install Docker
 #   yum:

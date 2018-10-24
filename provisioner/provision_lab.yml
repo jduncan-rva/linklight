@@ -86,7 +86,7 @@
   hosts: "managed_nodes:control_nodes"
   become: yes
   roles:
-    - user_accounts
+    - { role: user_accounts, when: not openshift }
     - { role: common}
     - { role: common_ocp, when: openshift }
 

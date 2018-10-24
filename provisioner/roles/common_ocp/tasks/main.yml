@@ -33,11 +33,3 @@
         delay: 5
         timeout: 300
   when: "'kernel' in update_all_packages.results"
-
-- name: Install preferred packages
-  yum:
-    name:
-      - vim-enhanced
-      - screen
-    state: present
-  become: yes

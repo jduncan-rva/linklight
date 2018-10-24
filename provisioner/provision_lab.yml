@@ -87,7 +87,7 @@
   become: yes
   roles:
     - { role: user_accounts, when: not openshift }
-    - { role: common}
+    - { role: common, when: not openshift}
     - { role: common_ocp, when: openshift }
 
 - name: CONFIGURE F5 WORKSHOP WEBSERVERS host1 and host2

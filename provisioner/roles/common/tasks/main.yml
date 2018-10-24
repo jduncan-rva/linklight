@@ -12,11 +12,9 @@
     - ssh
     - sudo
     - common
-  when: not openshift
 
 - hostname:
     name: "{{short_name}}"
-  when: not openshift
 
 - meta: flush_handlers
   tags:

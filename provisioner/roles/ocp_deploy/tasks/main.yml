@@ -3,36 +3,6 @@
 #   - import_tasks: certs.yml
 #
 #
-#   - name: Copy Ansible config
-#     copy:
-#       src: ansible.cfg
-#       dest: /etc/ansible/ansible.cfg
-#       owner: root
-#       group: root
-#       mode: 0644
-#       backup: yes
-#     become: yes
-#   when: provision_type == 'aws'
-#
-# - name: Copy hosts template
-#   template:
-#     src: "{{ provision_type }}.hosts.{{ cluster_type }}.{{ openshift_version }}.ini.j2"
-#     dest: /etc/ansible/hosts
-#     owner: root
-#     group: root
-#     mode: 0644
-#     backup: yes
-#   become: yes
-
-- name: restart dbus
-  service:
-    name: dbus
-    state: restarted
-
-- name: start up dnsmasq
-  service:
-    name: dnsmasq
-    state: restarted
 
 - name: Run OpenShift prerequisites
   command: ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml

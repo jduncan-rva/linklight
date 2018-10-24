@@ -94,6 +94,4 @@
   copy:
     src: ./{{ec2_name_prefix}}/{{ username }}-inventory.txt
     dest: /etc/ansible/hosts
-    owner: "{{ username }}"
-    group: "{{ username }}"
   when: username in inventory_hostname

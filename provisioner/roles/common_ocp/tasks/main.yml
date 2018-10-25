@@ -16,7 +16,6 @@
   yum:
     name: dnsmasq
     state: latest
-    enabled: yes
   become: yes
 
 - name: Update all packages

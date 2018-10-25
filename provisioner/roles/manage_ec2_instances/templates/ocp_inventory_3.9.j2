@@ -34,29 +34,11 @@
 {% endif %}
 {% endfor %}
 
-[glusterfs]
-{% for vm in infra_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-{% endif %}
-{% endfor %}
-{% for vm in app1_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-{% endif %}
-{% endfor %}
-{% for vm in app2_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-{% endif %}
-{% endfor %}
-
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
 nodes
 etcd
-glusterfs
 
 [OSEv3:vars]
 # Disable checks that are meant to catch issues early. This is an automated install that
@@ -145,8 +127,8 @@ osm_default_node_selector='role=app'
 
 # OpenShift Storage Options
 #
-openshift_storage_glusterfs_storageclass=true
-openshift_storage_glusterfs_storageclass_default=true
+# openshift_storage_glusterfs_storageclass=true
+# openshift_storage_glusterfs_storageclass_default=true
 
 # OpenShift Router Options
 #
@@ -186,8 +168,8 @@ openshift_hosted_registry_selector='role=infra'
 
 # Registry Storage Options
 #
-openshift_hosted_registry_storage_kind=glusterfs
-openshift_hosted_registry_storage_volume_size={{ openshift_registry_volume_size }}Gi
+# openshift_hosted_registry_storage_kind=glusterfs
+# openshift_hosted_registry_storage_volume_size={{ openshift_registry_volume_size }}Gi
 
 # Metrics deployment
 # See: https://docs.openshift.com/enterprise/latest/install_config/cluster_metrics.html
@@ -269,7 +251,7 @@ ansible_service_broker_node_selector={'role': 'infra'}
 ###############################################################################
 
 oreg_url=registry.access.redhat.com/openshift3/ose-${component}:${version}
-openshift_storage_glusterfs_image=registry.access.redhat.com/rhgs3/rhgs-server-rhel7
-openshift_storage_glusterfs_heketi_image=registry.access.redhat.com/rhgs3/rhgs-volmanager-rhel7
-openshift_storage_glusterfs_block_image=registry.access.redhat.com/rhgs3/rhgs-gluster-block-prov-rhel7
+# openshift_storage_glusterfs_image=registry.access.redhat.com/rhgs3/rhgs-server-rhel7
+# openshift_storage_glusterfs_heketi_image=registry.access.redhat.com/rhgs3/rhgs-volmanager-rhel7
+# openshift_storage_glusterfs_block_image=registry.access.redhat.com/rhgs3/rhgs-gluster-block-prov-rhel7
 openshift_examples_modify_imagestreams=true

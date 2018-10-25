@@ -32,7 +32,7 @@
   become: no
   tags: openshift_deploy_cluster
 
-- name: Run OpenShift installer (this will take a while!)
-  command: ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
-  become: no
-  tags: openshift_deploy_cluster
+# - name: Run OpenShift installer (this will take a while!)
+#   command: ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
+#   become: no
+#   tags: openshift_deploy_cluster

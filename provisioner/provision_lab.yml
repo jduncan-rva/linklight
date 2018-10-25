@@ -76,12 +76,6 @@
   roles:
     - connectivity_test
 
-- name: Set up SSH access for OpenShift deploy
-  hosts: control_nodes
-  become: yes
-  roles:
-    - { role: users_ocp, when: openshift }
-
 - name: Configure common options on managed nodes and control nodes
   hosts: "managed_nodes:control_nodes"
   become: yes

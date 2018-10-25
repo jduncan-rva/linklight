@@ -16,6 +16,7 @@
   yum:
     name: dnsmasq
     state: latest
+    enabled: yes
   become: yes
 
 - name: Update all packages
@@ -34,9 +35,11 @@
   ignore_errors: yes
   become: yes
 
-- name: Wait for nodes to reboot
-  wait_for_connection:
-    connect_timeout: 20
-    sleep: 5
-    delay: 5
+- name: Wait for nodes to boot
+  wait_for:
+    host: "{{ ansible_host }}"
+    port: 22
+    delay: 30
     timeout: 300
+    search_regex: OpenSSH
+  delegate_to: localhost

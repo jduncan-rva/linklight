@@ -175,7 +175,7 @@ openshift_hosted_registry_selector='role=infra'
 # See: https://docs.openshift.com/enterprise/latest/install_config/cluster_metrics.html
 #
 # By default metrics are not automatically deployed, set this to enable them
-openshift_metrics_install_metrics=true
+openshift_metrics_install_metrics=false
 #
 # Storage Options
 openshift_metrics_cassandra_storage_type=dynamic
@@ -190,7 +190,7 @@ openshift_metrics_heapster_nodeselector={'role': 'infra'}
 # Logging deployment
 #
 # Currently logging deployment is disabled by default, enable it by setting this
-openshift_logging_install_logging=true
+openshift_logging_install_logging=false
 #
 # Logging storage config
 openshift_logging_elasticsearch_storage_type=pvc

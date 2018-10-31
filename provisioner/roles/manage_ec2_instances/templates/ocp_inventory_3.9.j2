@@ -1,36 +1,36 @@
 [masters]
 {% for vm in master_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_ip_address }}
+{{ vm.private_dns_name }}
 {% endif %}
 {% endfor %}
 
 [etcd]
 {% for vm in master_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_ip_address }}
+{{ vm.private_dns_name }}
 {% endif %}
 {% endfor %}
 
 [nodes]
 {% for vm in master_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_ip_address }}
+{{ vm.private_dns_name }}
 {% endif %}
 {% endfor %}
 {% for vm in infra_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_ip_address }} openshift_node_labels="{'role': 'infra'}"
+{{ vm.private_dns_name }} openshift_node_labels="{'role': 'infra'}"
 {% endif %}
 {% endfor %}
 {% for vm in app1_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_ip_address }} openshift_node_labels="{'role': 'app'}"
+{{ vm.private_dns_name }} openshift_node_labels="{'role': 'app'}"
 {% endif %}
 {% endfor %}
 {% for vm in app2_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_ip_address }} openshift_node_labels="{'role': 'app'}"
+{{ vm.private_dns_name }} openshift_node_labels="{'role': 'app'}"
 {% endif %}
 {% endfor %}
 

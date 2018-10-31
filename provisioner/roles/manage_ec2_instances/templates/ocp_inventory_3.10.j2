@@ -129,8 +129,11 @@ osm_cockpit_plugins=['cockpit-kubernetes']
 
 # If an external load balancer is used public hostname should resolve to
 # external load balancer address
-openshift_master_cluster_public_hostname={{ openshift_public_hostname }}
-
+{% for vm in master_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+openshift_master_cluster_public_hostname={{ vm.public_dns_name }}
+{% endif %}
+{% endfor %}
 # default project node selector
 osm_default_node_selector='node-role.kubernetes.io/compute=true'
 

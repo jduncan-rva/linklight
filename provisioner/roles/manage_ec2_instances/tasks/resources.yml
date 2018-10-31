@@ -64,7 +64,29 @@
     rules_egress:
       - proto: all
         cidr_ip: 0.0.0.0/0
-  when: ec2_vpc_id is undefined
+  when: ec2_vpc_id is undefined and not openshift
+  register: create_sg
+  until: create_sg is not failed
+  retries: 5
+
+- name: Create OpenShift EC2 security group for VPC named {{ ec2_name_prefix }}-vpc
+  ec2_group:
+    name: "{{ ec2_name_prefix }}-insecure_all"
+    description: all ports open
+    region: "{{ ec2_region }}"
+    vpc_id: "{{create_vpc.vpc.id}}"
+    tags:
+      Username: "{{ linklight_user }}"
+      Info: "Username that provisioned this-> {{ linklight_user }}"
+      Linklight: "This was provisioned through the linklight provisioner"
+      Students: "{{student_total}}"
+    rules:
+      - proto: tcp
+        cidr_ip: 0.0.0.0/0
+        ports:
+          - 80
+          - 443
+  when: ec2_vpc_id is undefined and openshift
   register: create_sg
   until: create_sg is not failed
   retries: 5

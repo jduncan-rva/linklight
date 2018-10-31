@@ -72,7 +72,7 @@
 - name: Create OpenShift EC2 security group for VPC named {{ ec2_name_prefix }}-vpc
   ec2_group:
     name: "{{ ec2_name_prefix }}-insecure_all"
-    description: all ports open
+    description: all ports open - created for OpenShift by Linklight
     region: "{{ ec2_region }}"
     vpc_id: "{{create_vpc.vpc.id}}"
     tags:

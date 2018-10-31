@@ -34,22 +34,22 @@
 {% endif %}
 {% endfor %}
 
-[glusterfs]
-{% for vm in infra_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-{% endif %}
-{% endfor %}
-{% for vm in app1_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-{% endif %}
-{% endfor %}
-{% for vm in app2_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-{% endif %}
-{% endfor %}
+# [glusterfs]
+# {% for vm in infra_node_facts.instances %}
+# {% if 'student' + item == vm.tags.Student %}
+# {{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
+# {% endif %}
+# {% endfor %}
+# {% for vm in app1_node_facts.instances %}
+# {% if 'student' + item == vm.tags.Student %}
+# {{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
+# {% endif %}
+# {% endfor %}
+# {% for vm in app2_node_facts.instances %}
+# {% if 'student' + item == vm.tags.Student %}
+# {{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
+# {% endif %}
+# {% endfor %}
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
@@ -139,13 +139,13 @@ osm_default_node_selector='node-role.kubernetes.io/compute=true'
 
 # OpenShift Storage Options
 #
-openshift_storage_glusterfs_storageclass=true
-openshift_storage_glusterfs_storageclass_default=true
+# openshift_storage_glusterfs_storageclass=true
+# openshift_storage_glusterfs_storageclass_default=true
 
-openshift_storage_glusterfs_block_deploy=true
-openshift_storage_glusterfs_block_storageclass=true
-openshift_storage_glusterfs_block_storageclass_default=false
-openshift_storage_glusterfs_block_host_vol_size=15
+# openshift_storage_glusterfs_block_deploy=true
+# openshift_storage_glusterfs_block_storageclass=true
+# openshift_storage_glusterfs_block_storageclass_default=false
+# openshift_storage_glusterfs_block_host_vol_size=15
 
 # OpenShift Router Options
 #
@@ -183,8 +183,8 @@ openshift_hosted_registry_selector='node-role.kubernetes.io/infra=true'
 #
 # Registry Storage Options
 #
-openshift_hosted_registry_storage_kind=glusterfs
-openshift_hosted_registry_storage_volume_size={{ openshift_registry_volume_size }}Gi
+# openshift_hosted_registry_storage_kind=glusterfs
+# openshift_hosted_registry_storage_volume_size={{ openshift_registry_volume_size }}Gi
 
 # Metrics deployment
 # See: https://docs.openshift.com/enterprise/latest/install_config/cluster_metrics.html
@@ -199,9 +199,9 @@ openshift_metrics_install_metrics=true
 # generally enough for up to 1000 pods. Additional volumes can be created
 # manually after the fact and metrics scaled per the docs.
 #
-openshift_metrics_cassandra_storage_type=dynamic
-openshift_metrics_cassandra_pvc_size=10Gi
-openshift_metrics_cassandra_pvc_storage_class_name=glusterfs-storage-block
+# openshift_metrics_cassandra_storage_type=dynamic
+# openshift_metrics_cassandra_pvc_size=10Gi
+# openshift_metrics_cassandra_pvc_storage_class_name=glusterfs-storage-block
 #
 # Other Metrics Options -- Common items you may wish to reconfigure, for the complete
 # list of options please see roles/openshift_metrics/README.md
@@ -218,9 +218,9 @@ openshift_logging_install_logging=true
 #
 # Logging storage config
 #
-openshift_logging_es_pvc_dynamic=true
-openshift_logging_es_pvc_size=10Gi
-openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block
+# openshift_logging_es_pvc_dynamic=true
+# openshift_logging_es_pvc_size=10Gi
+# openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block
 #
 # Other Logging Options -- Common items you may wish to reconfigure, for the complete
 # list of options please see roles/openshift_logging/README.md
@@ -237,17 +237,17 @@ openshift_hosted_prometheus_deploy=true
 # Prometheus storage config
 # By default prometheus uses emptydir storage, if you want to persist you should
 # configure it to use pvc storage type. Each volume must be ReadWriteOnce.
-openshift_prometheus_storage_type=pvc
-openshift_prometheus_storage_class=glusterfs-storage-block
-openshift_prometheus_pvc_size=10Gi
+# openshift_prometheus_storage_type=pvc
+# openshift_prometheus_storage_class=glusterfs-storage-block
+# openshift_prometheus_pvc_size=10Gi
 
-openshift_prometheus_alertmanager_storage_type=pvc
-openshift_prometheus_alertmanager_storage_class=glusterfs-storage-block
-openshift_prometheus_alertmanager_pvc_size=10Gi
+# openshift_prometheus_alertmanager_storage_type=pvc
+# openshift_prometheus_alertmanager_storage_class=glusterfs-storage-block
+# openshift_prometheus_alertmanager_pvc_size=10Gi
 
-openshift_prometheus_alertbuffer_storage_type=pvc
-openshift_prometheus_alertbuffer_storage_class=glusterfs-storage-block
-openshift_prometheus_alertbuffer_pvc_size=10Gi
+# openshift_prometheus_alertbuffer_storage_type=pvc
+# openshift_prometheus_alertbuffer_storage_class=glusterfs-storage-block
+# openshift_prometheus_alertbuffer_pvc_size=10Gi
 
 # Configure the multi-tenant SDN plugin (default is 'redhat/openshift-ovs-subnet')
  os_sdn_network_plugin_name='redhat/openshift-ovs-networkpolicy'

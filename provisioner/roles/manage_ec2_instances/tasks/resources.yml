@@ -81,15 +81,10 @@
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{student_total}}"
     rules:
-      - proto: tcp
-        cidr_ip: 0.0.0.0/0
-        ports:
-          - 80
-          - 443
-          - 22
-          - 8443
       - proto: all
-        group_name: "{{ ec2_name_prefix }}-insecure_all"
+        cidr_ip: 0.0.0.0/0
+        from_port: -1 
+        to_port: -1
   when: ec2_vpc_id is undefined and openshift
   register: create_sg
   until: create_sg is not failed

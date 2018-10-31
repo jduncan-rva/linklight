@@ -86,6 +86,8 @@
         ports:
           - 80
           - 443
+          - 22
+          - 8443
   when: ec2_vpc_id is undefined and openshift
   register: create_sg
   until: create_sg is not failed

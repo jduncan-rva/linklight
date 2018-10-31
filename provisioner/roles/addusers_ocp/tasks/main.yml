@@ -1,4 +1,9 @@
 ---
+- name: Create htpasswd file 
+  copy:
+    content: ""
+    dest: /etc/origin/master/htpasswd
+    force: no
 
 - name: Create users
   command: htpasswd -b /etc/origin/master/htpasswd '{{ item.username }}' '{{ item.password }}'

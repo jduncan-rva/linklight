@@ -102,6 +102,7 @@
 
 - name: Configure Users for OpenShift cluster
   hosts: master_nodes
+  become: yes
   roles:
     - { role: addusers_ocp, when: openshift }
 

@@ -54,6 +54,20 @@
     - "{{ app2_node_facts.instances }}"
   changed_when: no
 
+- name: add hosts to master groups (OPENSHIFT MODE)
+  add_host: 
+    name: "{{ item.tags.Name }}"
+    groups: master_nodes
+  with_items:
+    - "{{ master_node_facts.instances }}"
+
+- name: add hosts to database groups (OPENSHIFT MODE)
+  add_host: 
+    name: "{{ item.tags.Name }}"
+    groups: database_nodes
+  with_items:
+    - "{{ db_node_facts.instances }}"
+
 - name: Generate student OpenShift inventories
   template:
     src: ocp_inventory_{{ openshift_version }}.j2

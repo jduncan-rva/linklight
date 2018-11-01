@@ -12,6 +12,5 @@
 
 - name: Create admin users
   command: oc adm policy add-cluster-role-to-user cluster-admin '{{ item.username }}'
-  run_once: yes
   with_items: "{{ openshift_users }}"
   when: item.admin is defined and item.admin == True

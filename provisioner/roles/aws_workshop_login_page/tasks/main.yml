@@ -4,6 +4,10 @@
     dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-index.html"
   when: s3_state == 'present' and not openshift
 
+- name: gather OCP facts for web page (OPENSHIFT MODE)
+  include_tasks: openshift.yml
+  when: when s3_state == 'present' and openshift
+
 - name: create student OpenShift webpage
   template:
     src: ./templates/index_ocp.html.j2

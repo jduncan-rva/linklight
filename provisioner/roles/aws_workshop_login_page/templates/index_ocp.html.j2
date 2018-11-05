@@ -294,13 +294,39 @@ $("document").ready(function(){
       <p class="studentinfo">student{{number}} - Click to see login details</p>
     </div>
     <div class="content">
-{% for host in ansible_node_facts.instances %}
+{% for host in master_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{% if host.tags.short_name == 'master' %}
+<p>
 To log into your OpenShift cluster, browse to https://{{ host.public_hostname }}
-username:   student{{number}}<br>
-password:   {{admin_password}}<br>
+Or use the oc command line client by SSH'ing into the same system using one of the following usernames.
+</p>
 {% endif %}
+{% endfor %}
+{% for user in openshift_users %}
+User: {{ user.username }} Password: {{ user.password }} <br/>
+{% endfor %}
+</p>
+<p><em>Infrastructure Nodes</em></p>
+{% for host in infra_node_facts.instances %}
+{% if 'student' ~ number == host.tags.Student %}
+{{ host.public_hostname }}
+{% endif %}
+{% endfor %}
+<p><em>Application Nodes</em></p>
+{% for host in app1_node_facts.instances %}
+{% if 'student' ~ number == host.tags.Student %}
+{{ host.public_hostname }}
+{% endif %}
+{% endfor %}
+{% for host in app2_node_facts.instances %}
+{% if 'student' ~ number == host.tags.Student %}
+{{ host.public_hostname }}
+{% endif %}
+{% endfor %}
+<p><em>Database Nodes</em></p>
+{% for host in db_node_facts.instances %}
+{% if 'student' ~ number == host.tags.Student %}
+{{ host.public_hostname }}
 {% endif %}
 {% endfor %}
     </div>

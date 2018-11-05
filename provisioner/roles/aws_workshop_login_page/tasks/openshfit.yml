@@ -1,0 +1,39 @@
+- name: grab facts for master node
+  ec2_instance_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Workshop_master": "{{ec2_name_prefix}}-master"
+  register: master_node_facts
+
+- name: grab facts for infra node
+  ec2_instance_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Workshop_infra": "{{ec2_name_prefix}}-infra"
+  register: infra_node_facts
+
+- name: grab facts for app1 node
+  ec2_instance_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Workshop_app1": "{{ec2_name_prefix}}-app1"
+  register: app1_node_facts
+
+- name: grab facts for app2 node
+  ec2_instance_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Workshop_app2": "{{ec2_name_prefix}}-app2"
+  register: app2_node_facts
+
+- name: grab facts for db node
+  ec2_instance_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Workshop_db": "{{ec2_name_prefix}}-db"
+  register: db_node_facts

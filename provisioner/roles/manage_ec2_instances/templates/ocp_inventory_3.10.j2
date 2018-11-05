@@ -89,8 +89,11 @@ openshift_release="{{ openshift_version }}"
 # default subdomain to use for exposed routes, you should have wildcard dns
 # for *.apps.test.example.com that points at your infra nodes which will run
 # your router
-openshift_master_default_subdomain=apps.{{ openshift_public_hostname }}
-
+{% for vm in infra_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+openshift_master_default_subdomain={{ vm.public_dns_name }}
+{% endif %}
+{% endfor %}
 
 ###############################################################################
 # Additional configuration variables follow                                   #

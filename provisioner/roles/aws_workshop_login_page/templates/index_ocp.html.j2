@@ -309,24 +309,24 @@ User: {{ user.username }} Password: {{ user.password }} <br/>
 <p><em>Infrastructure Nodes</em></p>
 {% for host in infra_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_hostname }}
+{{ host.public_dns_name }}
 {% endif %}
 {% endfor %}
 <p><em>Application Nodes</em></p>
 {% for host in app1_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_hostname }}
+{{ host.public_dns_name }}
 {% endif %}
 {% endfor %}
 {% for host in app2_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_hostname }}
+{{ host.public_dns_name }}
 {% endif %}
 {% endfor %}
 <p><em>Database Nodes</em></p>
 {% for host in db_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_hostname }}
+{{ host.public_dns_name }}
 {% endif %}
 {% endfor %}
     </div>

@@ -28,7 +28,7 @@
    region: "{{ec2_region}}"
    suffix: "{{ ec2_name_prefix|lower }}-index.html"
   register: s3_site
-  when: s3_state == 'present'
+  when: s3_state 
 
 - name: DNS for student webpage
   route53:
@@ -61,4 +61,4 @@
       .html: text/html
     permission: public-read
     include: "{{ ec2_name_prefix|lower }}-index.html"
-  when: s3_state == 'present'
+  when: s3_state 

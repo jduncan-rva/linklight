@@ -1,18 +1,10 @@
-- name: create student webpage
-  template:
-    src: ./templates/index.html.j2
-    dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-index.html"
-  when: s3_state == 'present' and not openshift
-
 - name: gather OCP facts for web page (OPENSHIFT MODE)
   include_tasks: openshift.yml
-  when: when s3_state == 'present' and openshift
 
 - name: create student OpenShift webpage
   template:
     src: ./templates/index_ocp.html.j2
     dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-index.html"
-  when: s3_state == 'present' and openshift
 
 - name: create s3 bucket
   s3_bucket:
@@ -28,7 +20,6 @@
    region: "{{ec2_region}}"
    suffix: "{{ ec2_name_prefix|lower }}-index.html"
   register: s3_site
-  when: s3_state == 'present' 
 
 - name: DNS for student webpage
   route53:
@@ -61,4 +52,3 @@
       .html: text/html
     permission: public-read
     include: "{{ ec2_name_prefix|lower }}-index.html"
-  when: s3_state == 'present' 

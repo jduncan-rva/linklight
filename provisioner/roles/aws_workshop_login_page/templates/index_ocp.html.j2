@@ -297,7 +297,7 @@ $("document").ready(function(){
 {% for host in master_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 <p>
-To log into your OpenShift cluster, browse to https://{{ host.public_hostname }}
+To log into your OpenShift cluster, browse to https://{{ host.public_dns_name }}
 Or use the oc command line client by SSH'ing into the same system using one of the following usernames.
 </p>
 {% endif %}

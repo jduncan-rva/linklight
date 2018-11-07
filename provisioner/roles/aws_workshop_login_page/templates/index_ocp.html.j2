@@ -181,6 +181,8 @@ a {
 
 </style>
 <head>
+<link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png">
+<link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="image/png">
 <link href=“https://fonts.googleapis.com/css?family=Overpass:300,400,700” rel=“stylesheet”>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
@@ -204,7 +206,7 @@ $("document").ready(function(){
     });
 });
 </script>
-
+<title>OpenShift and Ansible Workshop - {{ ec2_name_prefix }}</title>
 </head>
 
 <body>
@@ -216,9 +218,6 @@ $("document").ready(function(){
             <div class="col-md-8 mx-auto">
               <h1 class="project-name">Better Together: OpenShift and Ansible Workshop <br/><strong class="text-nowrap">Technical Workshops</strong></h1>
               <h2>Lorem ipsom dolor</h2>
-
-                <a href="https://github.com/network-automation/linklight" class="btn btn-ghost">View on GitHub</a><br><br>
-
               <h1>Workshop Name: {{ec2_name_prefix}}</h1>
 
             </div>
@@ -228,20 +227,27 @@ $("document").ready(function(){
 
 <section class="main-content">
 <section>
-    OpenShift Links and Lab information goes here.
+<h3>Dev Track: Provisioning Services with OpenShift and Ansible</h3>
+<ul>
+<li>Understand how Ansible Tower and OpenShift empowers developers to do more work by automating deployments and communications at scale.</li>
+<li>Using a preprovisioned and configured Tower set up, install MySQL and OpenShift Service Broker to configure MySQL access for an application.</li>
+</ul>
 </section>
-
-<hr>
-
+<hr/>
 <section>
+<h3>Ops Track: Advanced Ansible management of OpenShift "Day 2" operations</h3>
+<ul>
+<li>Understand how to scale a multicluster environment using Ansible.</li>
+<li>Deploy OpenShift and scale automation in a multi-cluster environment.</li>
+</ul>
 </section>
-
+<hr>
 <section>
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
                 <h2>Workshop Resources</h2>
-                <p>Links and materials to help complete the exercises.</p>
+                <p>Links and materials to help complete exercises and additional information.</p>
             </div>
         </div>
 
@@ -251,7 +257,7 @@ $("document").ready(function(){
             </div>
 
             <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://www.ansible.com/workshop-license">Ansible Tower Workshop License</a>
+                <a class="btn btn-secondary btn-block" href="https://docs.openshift.com/">OpenShift Documentation</a>
             </div>
 
             <div class="col-sm-4">
@@ -315,7 +321,7 @@ User: {{ user.username }} Password: {{ user.password }} <br/>
 <p><em>Application Nodes</em></p>
 {% for host in app1_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_dns_name }}
+{{ host.public_dns_name }} <br/>
 {% endif %}
 {% endfor %}
 {% for host in app2_node_facts.instances %}

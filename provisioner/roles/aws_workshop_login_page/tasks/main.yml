@@ -69,16 +69,15 @@
   when:
     - ec2_region == 'us-east-1'
 
-- name: DNS for student webpage
+- name: Wildcard DNS for student infra nodes 
   route53:
     state: "{{ s3_state }}"
     zone: "{{workshop_dns_zone}}"
-    record: "{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}"
-    type: CNAME
+    record: "{{ item.tags.AppDomain }}"
+    type: A
     overwrite: yes
-    value: "{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}.s3-website.{{ec2_region}}.amazonaws.com"
-  when:
-    - ec2_region != 'us-east-1'
+    value: "{{ item.public_ip_address }}"
+  with_items: "{{ infra_node_facts.instances }}"
 
 - name: PUT student webpage
   s3_sync:

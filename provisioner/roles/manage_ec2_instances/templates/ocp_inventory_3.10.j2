@@ -91,7 +91,7 @@ openshift_release="{{ openshift_version }}"
 # your router
 {% for vm in infra_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-openshift_master_default_subdomain={{ vm.public_dns_name }}
+openshift_master_default_subdomain={{ vm.tags.AppDomain }}
 {% endif %}
 {% endfor %}
 

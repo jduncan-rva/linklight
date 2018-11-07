@@ -73,7 +73,7 @@
   route53:
     state: "{{ s3_state }}"
     zone: "{{workshop_dns_zone}}"
-    record: "{{ item.tags.AppDomain }}"
+    record: "*.{{ item.tags.AppDomain }}"
     type: A
     overwrite: yes
     value: "{{ item.public_ip_address }}"

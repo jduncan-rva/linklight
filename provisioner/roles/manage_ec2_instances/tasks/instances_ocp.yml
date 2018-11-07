@@ -102,7 +102,7 @@
 
 - name: Set default app subdomain fact 
   set_fact: 
-    AppDomain: "*.student{{ item.0 + 1 }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
+    AppDomain: "student{{ item.0 + 1 }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
   with_indexed_items:
     - "{{ infra_output.instance_ids }}"
   when: infra_output.instance_ids is not none

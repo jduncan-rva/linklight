@@ -303,8 +303,7 @@ $("document").ready(function(){
 {% for host in master_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 <p>
-To log into your OpenShift cluster, browse to https://{{ host.public_dns_name }}
-Or use the oc command line client by SSH'ing into the same system using one of the following usernames.
+To log into your OpenShift cluster, browse to <strong><em>https://{{ host.public_dns_name }}</em></strong>.
 </p>
 {% endif %}
 {% endfor %}
@@ -312,13 +311,13 @@ Or use the oc command line client by SSH'ing into the same system using one of t
 User: {{ user.username }} Password: {{ user.password }} <br/>
 {% endfor %}
 </p>
-<p><em>Infrastructure Nodes</em></p>
+<p><strong>Infrastructure Nodes</strong></p>
 {% for host in infra_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 {{ host.public_dns_name }}
 {% endif %}
 {% endfor %}
-<p><em>Application Nodes</em></p>
+<p><strong>Application Nodes</strong></p>
 {% for host in app1_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 {{ host.public_dns_name }} <br/>
@@ -329,7 +328,7 @@ User: {{ user.username }} Password: {{ user.password }} <br/>
 {{ host.public_dns_name }}
 {% endif %}
 {% endfor %}
-<p><em>Database Nodes</em></p>
+<p><strong>Database Nodes</strong></p>
 {% for host in db_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 {{ host.public_dns_name }}

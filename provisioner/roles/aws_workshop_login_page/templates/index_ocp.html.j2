@@ -210,24 +210,20 @@ $("document").ready(function(){
 </head>
 
 <body>
-
-
     <section class="page-header">
       <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
               <h1 class="project-name">Better Together: OpenShift and Ansible Workshop <br/><strong class="text-nowrap">Technical Workshops</strong></h1>
-              <h2>Lorem ipsom dolor</h2>
-              <h1>Workshop Name: {{ec2_name_prefix}}</h1>
-
+              <h2>Welcome, and thanks for participating!</h2>
+              <h1>Workshop Environment: {{ec2_name_prefix}}</h1>
             </div>
         </div>
       </div>
     </section>
-
 <section class="main-content">
 <section>
-<h3>Dev Track: Provisioning Services with OpenShift and Ansible</h3>
+<h4>Dev Track: Provisioning Services with OpenShift and Ansible</h4>
 <ul>
 <li>Understand how Ansible Tower and OpenShift empowers developers to do more work by automating deployments and communications at scale.</li>
 <li>Using a preprovisioned and configured Tower set up, install MySQL and OpenShift Service Broker to configure MySQL access for an application.</li>
@@ -235,7 +231,7 @@ $("document").ready(function(){
 </section>
 <hr/>
 <section>
-<h3>Ops Track: Advanced Ansible management of OpenShift "Day 2" operations</h3>
+<h4>Ops Track: Advanced Ansible management of OpenShift "Day 2" operations</h4>
 <ul>
 <li>Understand how to scale a multicluster environment using Ansible.</li>
 <li>Deploy OpenShift and scale automation in a multi-cluster environment.</li>
@@ -250,45 +246,34 @@ $("document").ready(function(){
                 <p>Links and materials to help complete exercises and additional information.</p>
             </div>
         </div>
-
         <div class="row">
             <div class="col-sm-4">
                 <a class="btn btn-secondary btn-block" href="https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe">Download: PuTTY for Windows</a>
             </div>
-
             <div class="col-sm-4">
                 <a class="btn btn-secondary btn-block" href="https://docs.openshift.com/">OpenShift Documentation</a>
             </div>
-
             <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://ansible.sivel.net/test/">Ansible Template Tester</a>
+                <a class="btn btn-secondary btn-block" href="https://github.com/openshift/origin/releases/tag/v3.10.0">OC Command Line Client Downloads</a>
             </div>
         </div>
 <br>
         <div class="row">
             <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://docs.ansible.com/ansible/latest/network/index.html">Documentation Network Automation </a>
+                <a class="btn btn-secondary btn-block" href="https://docs.ansible.com">Ansible Documentation</a>
             </div>
-
             <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://docs.ansible.com/ansible/latest/modules/list_of_network_modules.html">Ansible Network Modules</a>
+                <a class="btn btn-secondary btn-block" href="https://docs.ansible.com/ansible/latest/modules/modules_by_category.html">Ansible Module Index</a>
             </div>
-
-            <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://pythex.org/">Real-time regular expression editor</a>
-            </div>
-
         </div>
     </div>
 </section>
-
-
 <section>
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
-                <h2>Workbench Information</h2>
-                <p>Click your student number for login information</p>
+                <h2>Lab Environments</h2>
+                <p>Each participant will be assigned a 4-node OpenShift 3.10 cluster. The information for each participant is below. Click on your user number for details.</p>
             </div>
         </div>
 
@@ -303,21 +288,22 @@ $("document").ready(function(){
 {% for host in master_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 <p>
-To log into your OpenShift cluster, browse to <strong><em>https://{{ host.public_dns_name }}</em></strong>.
-</p>
+To get to your OpenShift cluster, browse to <strong><a href=https://{{ host.public_dns_name }}>https://{{ host.public_dns_name }}</a></strong>.<br/>
 {% endif %}
 {% endfor %}
 {% for user in openshift_users %}
 User: {{ user.username }} Password: {{ user.password }} <br/>
 {% endfor %}
 </p>
-<p><strong>Infrastructure Nodes</strong></p>
+<p><strong>Infrastructure Nodes</strong><br/>
 {% for host in infra_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_dns_name }}
+{{ host.public_dns_name }}<br/>
+Application Subdomain: *.{{ host.tags.AppDomain }}<br/>
 {% endif %}
 {% endfor %}
-<p><strong>Application Nodes</strong></p>
+</p>
+<p><strong>Application Nodes</strong><br/>
 {% for host in app1_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 {{ host.public_dns_name }} <br/>
@@ -325,23 +311,23 @@ User: {{ user.username }} Password: {{ user.password }} <br/>
 {% endfor %}
 {% for host in app2_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_dns_name }}
+{{ host.public_dns_name }}<br/>
 {% endif %}
 {% endfor %}
-<p><strong>Database Nodes</strong></p>
+</p>
+<p><strong>Database Nodes</strong><br/>
 {% for host in db_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_dns_name }}
+{{ host.public_dns_name }}<br/>
 {% endif %}
 {% endfor %}
+</p>
     </div>
   </div>
 {% endfor %}
 
        </div>
     </div>
-</section>
-
 </section>
 
 <div class="linklightfooter">

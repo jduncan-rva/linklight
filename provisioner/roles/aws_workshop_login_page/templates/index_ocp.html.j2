@@ -290,9 +290,13 @@ $("document").ready(function(){
 {% for host in master_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 <p>
-To get to your OpenShift cluster, browse to <strong><a href=https://{{ host.public_dns_name }}>https://{{ host.public_dns_name }}</a></strong>.<br/>
+<strong>Master Nodes</strong><br/>
+{{ host.public_dns_name }}<br/><br/>
+OpenShift URL:<br/>
+<a href=https://{{ host.public_dns_name }}>https://{{ host.public_dns_name }}</a></strong>.<br/>
 {% endif %}
 {% endfor %}
+<strong><br/>OpenShift Users:<br/></strong>
 {% for user in openshift_users %}
 User: {{ user.username }} Password: {{ user.password }} <br/>
 {% endfor %}

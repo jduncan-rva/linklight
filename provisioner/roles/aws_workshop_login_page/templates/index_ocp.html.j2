@@ -305,7 +305,8 @@ User: {{ user.username }} Password: {{ user.password }} <br/>
 {% for host in infra_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 {{ host.public_dns_name }}<br/>
-Application Subdomain: *.{{ host.tags.AppDomain }}<br/>
+Application Subdomain:<br/>
+<em>*.{{ host.tags.AppDomain }}</em><br/>
 {% endif %}
 {% endfor %}
 </p>

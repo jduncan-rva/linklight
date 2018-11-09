@@ -80,8 +80,8 @@
   hosts: "managed_nodes:control_nodes"
   become: yes
   roles:
-    - { role: user_accounts, when: not openshift }
-    - { role: common, when: not openshift}
+    - user_accounts
+    - common
     - { role: common_ocp, when: openshift }
 
 - name: CONFIGURE F5 WORKSHOP WEBSERVERS host1 and host2

@@ -43,6 +43,11 @@
     src: ./templates/index_ocp.html.j2
     dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-index.html"
 
+- name: create Ops lab guide
+  template: 
+    src: ops_lab.html.j2
+    dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-ops-guide.html"
+
 - name: create s3 bucket
   s3_bucket:
     name: "{{ec2_name_prefix|lower}}.{{workshop_dns_zone|lower}}"
@@ -79,7 +84,7 @@
     value: "{{ item.public_ip_address }}"
   with_items: "{{ infra_node_facts.instances }}"
 
-- name: PUT student webpage
+- name: PUT student webpage and other docs
   s3_sync:
     bucket: "{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}"
     region: "{{ec2_region}}"

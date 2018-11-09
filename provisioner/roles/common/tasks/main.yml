@@ -15,7 +15,9 @@
 
 - hostname:
     name: "{{short_name}}"
+  when: not openshift
 
 - meta: flush_handlers
   tags:
     - common
+  when: not openshift

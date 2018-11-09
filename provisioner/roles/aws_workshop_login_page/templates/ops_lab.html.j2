@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<font face="verdana,sans,arial">
+<style>
+pre {
+  background: black;
+  color: #fff !important;
+  width: 100%;
+  padding: 5px;
+  max-width: 500px;
+
+}
+
+.content{
+         display:none;
+         margin: 10px;
+}
+
+.header{
+  border-bottom: 1px solid #494a5a;
+  padding-bottom: 20px;
+}
+
+.student_logins {
+    width:100%;
+    border:1px solid #d3d3d3;
+}
+.student_logins div {
+    width:100%;
+}
+.student_logins .header {
+    background-color:#d3d3d3;
+    padding: 2px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.student_logins .studentx {
+    display: none;
+    padding : 5px;
+}
+
+.linklightfooter {
+    background-color: #212121;
+    padding: 80px 0px;
+    font-size: 0.7em;
+    color: #fff;
+    font-weight: 300;
+}
+
+section {
+    padding: 40px 0px;
+}
+
+body {
+  line-height: 1.5;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.theme-dark,
+.theme-dark *{
+    color: #fff;
+}
+
+.theme-bg-gray{
+    background-color: #cac8c8;
+}
+
+.theme-bg-darkgray{
+    background-color: #a2a1a1;
+}
+
+.btn {
+    border-radius: 0px;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 0px;
+}
+
+.btn.btn-block {
+    display: block;
+}
+
+.btn.btn-primary,
+.btn.btn-secondary {
+    background-color: #a2a1a1;
+    color: #fff;
+    padding: 30px;
+}
+
+.btn.btn-secondary {
+    background-color: #cac8c8;
+}
+
+.btn.btn-ghost{
+    border: 1px solid #fff;
+    color: #fff;
+    background: transparent;
+}
+
+
+.page-header {
+    background: #c00;
+    color: #fff;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 21px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.page-header h2 {
+    font-size: 1em;
+    font-weight: 300;
+}
+
+
+.main-content h1{
+    color: #333;
+}
+
+.main-content h2{
+    color: #cc0000;
+}
+
+.main-content h3, .main-content h4, .main-content h5, .main-content h6 {
+    color: #c00;
+}
+
+
+footer.site-footer{
+    background-color: #212121;
+    padding: 80px 0px;
+    font-size: 0.7em;
+    color: #fff;
+    font-weight: 300;
+}
+
+
+
+@media screen and (min-width: 768px){
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .main-content {
+        font-size: 1.125rem;
+    }
+}
+
+
+
+/* theme overrides */
+
+@media screen and (max-width: 42em){
+    .main-content {
+        padding: 2rem 0px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 64em) and (min-width: 42em){
+    .main-content {
+        padding: 2rem 0px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 64em){
+    .main-content {
+        max-width: none;
+        font-size: 1.1rem;
+    }
+}
+
+a {
+  test-decoration: none;
+}
+
+</style>
+<head>
+<link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png">
+<link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="image/png">
+<link href=“https://fonts.googleapis.com/css?family=Overpass:300,400,700” rel=“stylesheet”>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+$("document").ready(function(){
+  $click =  $('.studentinfo');   // Click selector
+
+
+  $click.click(function () {
+
+    $clicked = $(this);
+    $expand = $(this).parent('.header').next();  // Expand and collapse content selector
+
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $expand.slideToggle(500, function () {
+            //execute this after slideToggle is done
+            //change text of header based on visibility of content div
+        });
+
+    });
+});
+</script>
+<title>OpenShift and Ansible Workshop - {{ ec2_name_prefix }} Operations Lab Guide</title>
+</head>
+
+<body>
+    <section class="page-header">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+              <h1 class="project-name">Better Together: OpenShift and Ansible Workshop <br/>
+              <strong class="text-nowrap">Operations Lab Guide</strong></h1>
+              <h1>Workshop Environment: {{ec2_name_prefix}}</h1>
+            </div>
+        </div>
+      </div>
+    </section>
+<section class="main-content">
+    <div class="container">
+        <section>
+            <h4>1.0 - Getting to know Ansible</h4>
+            <h5>1.1 - Ansible essentials</h5>
+            <h5>1.2 - Interacting with Ansible</h5>
+                <h5>1.2.1 - Ad hoc commands</h5>
+                <h5>1.2.2 - Encrypting data with ansible-vault</h5>
+            <h5>1.3 - Ansible playbooks</h5>
+        </section>
+        <section>
+            <h4>2.0 - OpenShift Architecture</h4>
+            <h5>2.1 - Why containers are better</h5>
+                <h5>2.1.1 - What is a container?</h5>
+                <h5>2.1.2 - More effective process isolation</h5>
+                <h5>2.1.3 - From containers to pods</h5>
+            <h5>2.2 - Cluster architecture with kubernetes</h5>
+                <h5>2.2.1 - Control, Infra, and App Nodes</h5>
+                <h5>2.2.2 - Key services</h5>
+                <h5>2.2.3 - The Pod Network</h5>
+                <h5>2.2.4 - </h5>
+            <h5>2.3 - OpenShift goes beyond kubernetes</h5>
+                <h5>2.3.1 - Deploying your first applications</h5>
+                    <h5>2.3.1.1 - Using the web interface</h5>
+                    <h5>2.3.1.2 - Using the CLI</h5>
+                <h5>2.3.2 - OpenShift SDN</h5>
+                <h5>2.3.3 - Routing layer</h5>
+                <h5>2.3.4 - Additional application objects</h5>
+                <h5>2.3.5 - Parity between web and CLI</h5>
+        </section>
+        <section>
+            <h4>3.0 - OpenShift/Ansible integration points</h4>
+            <h5>3.1 - Deploying OpenShift</h5>
+            <h5>3.2 - Modifying an OpenShift cluster</h5>
+                <h5>3.2.1 - Adding a node</h5>
+                <h5>3.2.2 - Deploying OpenShift Container Storage (OCS)</h5>
+                <h5>3.3.3 - Other operations</h5>
+        </section>
+        <section>
+            <h4>4.0 - A real world CI/CD scenario</h4>
+            <p>In the final section of our workshop, we'll take everything we've been discussing and put it into practice with a large, complex, real-work workflow. In your cluster, you'll create multiple projects and use a Jenkins pipeline workflow that:</p>
+            <ul>
+                <li>Checks out source code</li>
+                <li>Builds a java application and archives it in Nexus</li>
+                <li>Runs unit tests for the application</li>
+                <li>Runs code analysis using Sonarqube</li>
+                <li>Builds a Wildfly container image</li>
+                <li>Deplous the app into a dev project and runs integration tests</li>
+                <li>Builds a human break into the OpenShift UI to confirm before it promotes the application to the stage project</li>
+            </ul>
+            <p>This is a complete analog to a modern CI/CD workflow.</p>
+
+        </section>
+        <section>
+            <h4>5.0 - Q&A and Wrap-Up</h4>
+        </section>
+    </div>
+</section>
+<div class="linklightfooter">
+  <div class="container">
+  <p>Red Hat, the Shadowman logo, Ansible, and Ansible Tower are trademarks or registered trademarks of Red Hat, Inc. or its subsidiaries in the United States and other countries.
+
+  All other parts of Ansible Linklight are made available under the terms of the MIT License</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,9 @@
 ---
 # tasks file for ocp_workshop_db
+- name: Ensure firewalld is installed
+  yum:
+    name: firewalld
+    state: present
 
 - name: Open MySQL ports for host
   firewalld:

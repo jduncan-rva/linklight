@@ -1,5 +1,15 @@
 ---
-- name: Create htpasswd file 
+- name: Ensure git is installed
+  yum:
+    name: git
+    state: present
+    
+- name: Check out CI/CD demo for use in workshop
+  git:
+    repo: 'https://github.com/siamaksade/openshift-cd-demo.git'
+    dest: /root/cicd-demo
+
+- name: Create htpasswd file
   copy:
     content: ""
     dest: /etc/origin/master/htpasswd

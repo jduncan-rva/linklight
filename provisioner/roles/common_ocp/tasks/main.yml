@@ -18,6 +18,12 @@
     state: latest
   become: yes
 
+- name: Install openvswitch package
+  yum:
+    name: openvswitch
+    state: latest
+  become: yes
+
 - name: Update all packages
   yum:
     name: "*"

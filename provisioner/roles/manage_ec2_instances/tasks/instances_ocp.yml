@@ -250,7 +250,7 @@
     db_ami: >
       {{ amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}
 
-- name: Create EC2 instances for app2
+- name: Create EC2 instances for dbnode
   ec2:
     assign_public_ip: yes
     key_name: "{{ ec2_name_prefix }}-key"
@@ -270,7 +270,7 @@
         delete_on_termination: true
   register: db_output
 
-- name: Ensure tags are present for app2
+- name: Ensure tags are present for dbnode
   ec2_tag:
     region: "{{ ec2_region }}"
     resource: "{{item.1}}"

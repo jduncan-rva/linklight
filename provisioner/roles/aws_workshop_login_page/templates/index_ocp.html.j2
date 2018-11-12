@@ -241,7 +241,7 @@ $("document").ready(function(){
             <ul>
                 <li><a href=https://s3.amazonaws.com/openshift-ansible-workshop-materials/ansible-essentials.html>Ansible Introduction</a></li>
                 <li><a href=https://s3.amazonaws.com/openshift-ansible-workshop-materials/openshift_technical_overview.pdf>OpenShift Technical Overview</a></li>
-                <li><a href={{ ec2_name_prefix }}-ops-guide.html>Ops Lab Guide</a></li>
+                <li><a href=https://s3.amazonaws.com/openshift-ansible-workshop-materials/ops_lab.html>Ops Lab Guide</a></li>
                 <li><a href=https://github.com/siamaksade/openshift-cd-demo>CI/CD Pipeline example</a></li>
             </ul>
         </section>
@@ -295,6 +295,14 @@ $("document").ready(function(){
       <p class="studentinfo">student{{number}} - Click to see login details</p>
     </div>
     <div class="content">
+{% for host in bastion_node_facts.instances %}
+{% if 'student' ~ number == host.tags.Student %}
+<p>
+<strong>Bastion Node</strong><br/>
+{{ host.public_dns_name }}
+{% endif %}
+{% endfor %}
+</p>
 {% for host in master_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 <p>

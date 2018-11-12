@@ -1,3 +1,11 @@
+- name: grab facts for bastion node
+  ec2_instance_facts:
+    region: "{{ ec2_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Workshop_master": "{{ec2_name_prefix}}-ansible"
+  register: bastion_node_facts
+
 - name: grab facts for master node
   ec2_instance_facts:
     region: "{{ ec2_region }}"
@@ -44,7 +52,7 @@
     dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-index.html"
 
 - name: create Ops lab guide
-  template: 
+  template:
     src: ops_lab.html.j2
     dest: "{{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix|lower }}-ops-guide.html"
 
@@ -74,7 +82,7 @@
   when:
     - ec2_region == 'us-east-1'
 
-- name: Wildcard DNS for student infra nodes 
+- name: Wildcard DNS for student infra nodes
   route53:
     state: "{{ s3_state }}"
     zone: "{{workshop_dns_zone}}"

@@ -3,7 +3,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_master": "{{ec2_name_prefix}}-ansible"
+      "tag:Workshop_ansible": "{{ec2_name_prefix}}-ansible"
   register: bastion_node_facts
 
 - name: grab facts for master node

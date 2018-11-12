@@ -295,14 +295,14 @@ $("document").ready(function(){
       <p class="studentinfo">student{{number}} - Click to see login details</p>
     </div>
     <div class="content">
+      <p>
+      <strong>Bastion Node</strong><br/>
 {% for host in bastion_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-<p>
-<strong>Bastion Node</strong><br/>
 {{ host.public_dns_name }}
 {% endif %}
 {% endfor %}
-</p>
+      </p>
 {% for host in master_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
 <p>

@@ -11,6 +11,10 @@ Each student is provisioned the following using linklight-ocp:
 * 4-node OpenShift cluster
 * External database node (primarily for the Dev track of the [])
 
+## Other content
+
+
+
 ## Deploying the lab
 
 Deploying linklight-ocp requires:
@@ -33,6 +37,12 @@ aws_secret_access_key = YYYYYYYYYYYYYYYYYYYYYYYY
 ```
 
 ### extra_vars.yml
+
+Any customization you'll need to add for the workshop will be covered as variables in a file called `extra_vars.yml`.
+
+```
+extra_vars content goes here
+```
 
 ### running the deploy playbook
 

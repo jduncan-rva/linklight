@@ -6,17 +6,31 @@ Linklight-ocp is based on the [Ansible Linklight Workshop Provisioner](https://g
 
 ## Lab Design
 
+Each student is provisioned the following using linklight-ocp:
+* bastion host for deploying OpenShift
+* 4-node OpenShift cluster
+* External database node (primarily for the Dev track of the [])
+
 ## Deploying the lab
 
-Deploying linklight-ocp requires the following:
+Deploying linklight-ocp requires:
 
 * AWS account with:
-  * quotas to accomodate `$(STUDENT_COUNT) * 6` instances.
+  * quotas to accommodate `$(STUDENT_COUNT) * 6` instances.
   * route53 controlled DNS zone
-  * S3 access 
+  * S3 access
 * Basic git knowledge
 
-### AWS Account
+### AWS credentials
+
+Ansible EC2 modules are designed to read your AWS credentials from multiple locations. I find storing a credentials file in my home directory to be easy and effective.
+
+```
+$ cat ~/.aws/credentials
+[default]
+aws_access_key_id = XXXXXXXXXXXXXXXX
+aws_secret_access_key = YYYYYYYYYYYYYYYYYYYYYYYY
+```
 
 ### extra_vars.yml
 

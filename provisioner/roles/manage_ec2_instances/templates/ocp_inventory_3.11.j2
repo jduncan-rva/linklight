@@ -151,6 +151,9 @@ osm_default_node_selector='node-role.kubernetes.io/compute=true'
 openshift_storage_glusterfs_storageclass=true
 openshift_storage_glusterfs_storageclass_default=true
 
+openshift_storage_glusterfs_image=registry.redhat.io/rhgs3/rhgs-server-rhel7:v3.11
+openshift_storage_glusterfs_block_image=registry.redhat.io/rhgs3/rhgs-gluster-block-prov-rhel7:v3.11
+openshift_storage_glusterfs_heketi_image=registry.redhat.io/rhgs3/rhgs-volmanager-rhel7:v3.11
 openshift_storage_glusterfs_block_deploy=true
 openshift_storage_glusterfs_block_storageclass=true
 openshift_storage_glusterfs_block_storageclass_default=false

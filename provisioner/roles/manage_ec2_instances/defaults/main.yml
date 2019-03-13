@@ -116,3 +116,8 @@ ec2_login_names:
   f5_hosts: ec2-user
   ocp-master: ec2-user
   ocp-app: ec2-user
+
+openshift_registry_volume_size: 20
+cns_storage_device: /dev/sda2
+cns_block_host_volume_size: 50
+openshift_network_plugin: redhat/openshift-ovs-networkpolicy

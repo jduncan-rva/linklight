@@ -34,29 +34,29 @@
 {% endif %}
 {% endfor %}
 
-# [glusterfs]
-# {% for vm in infra_node_facts.instances %}
-# {% if 'student' + item == vm.tags.Student %}
-# {{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-# {% endif %}
-# {% endfor %}
-# {% for vm in app1_node_facts.instances %}
-# {% if 'student' + item == vm.tags.Student %}
-# {{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-# {% endif %}
-# {% endfor %}
-# {% for vm in app2_node_facts.instances %}
-# {% if 'student' + item == vm.tags.Student %}
-# {{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-# {% endif %}
-# {% endfor %}
+[glusterfs]
+{% for vm in infra_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
+{% endif %}
+{% endfor %}
+{% for vm in app1_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
+{% endif %}
+{% endfor %}
+{% for vm in app2_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
+{% endif %}
+{% endfor %}
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
 nodes
 etcd
-# glusterfs
+glusterfs
 
 [OSEv3:vars]
 # Disable checks that are meant to catch issues early. This is an automated install that
@@ -192,8 +192,8 @@ openshift_hosted_registry_selector='node-role.kubernetes.io/infra=true'
 #
 # Registry Storage Options
 #
-# openshift_hosted_registry_storage_kind=glusterfs
-# openshift_hosted_registry_storage_volume_size={{ openshift_registry_volume_size }}Gi
+openshift_hosted_registry_storage_kind=glusterfs
+openshift_hosted_registry_storage_volume_size={{ openshift_registry_volume_size }}Gi
 
 # Metrics deployment
 # See: https://docs.openshift.com/container-platform/latest/install_config/cluster_metrics.html

@@ -37,17 +37,17 @@
 [glusterfs]
 {% for vm in infra_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/xvdb " ]'
+{{ vm.private_dns_name }} glusterfs_devices='["/dev/xvdb"]'
 {% endif %}
 {% endfor %}
 {% for vm in app1_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/xvdb" ]'
+{{ vm.private_dns_name }} glusterfs_devices='["/dev/xvdb"]'
 {% endif %}
 {% endfor %}
 {% for vm in app2_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/xvdb" ]'
+{{ vm.private_dns_name }} glusterfs_devices='["/dev/xvdb"]'
 {% endif %}
 {% endfor %}
 

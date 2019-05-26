@@ -222,68 +222,14 @@ $("document").ready(function(){
       </div>
     </section>
 <section class="main-content">
-    <div class="container">
-        <section>
-            <h4>Dev Track: Provisioning Services with OpenShift and Ansible</h4>
-            <ul>
-                <li>Understand how Ansible Tower and OpenShift empowers developers to do more work by automating deployments and communications at scale.</li>
-                <li>Using a preprovisioned and configured Tower set up, install MySQL and OpenShift Service Broker to configure MySQL access for an application.</li>
-            </ul>
-        </section>
-        <section>
-            <h4>Ops Track: Advanced Ansible management of OpenShift "Day 2" operations</h4>
-            <h5>Overall Goals</h5>
-            <p>
-            Understand how to scale a multicluster environment using Ansible.</br>
-            Deploy OpenShift and scale automation in a multi-cluster environment.
-            </p>
-            <h5>Links and Resources</h5>
-            <ul>
-                <li><a href=https://s3.amazonaws.com/openshift-ansible-workshop-materials/ansible-essentials.html>Ansible Introduction</a></li>
-                <li><a href=https://s3.amazonaws.com/openshift-ansible-workshop-materials/openshift_technical_overview.pdf>OpenShift Technical Overview</a></li>
-                <li><a href=https://s3.amazonaws.com/openshift-ansible-workshop-materials/ops_lab.html>Ops Lab Guide</a></li>
-                <li><a href=https://github.com/siamaksade/openshift-cd-demo>CI/CD Pipeline example</a></li>
-            </ul>
-        </section>
-    </div>
 </section>
 <hr>
 <section>
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
-                <h2>Workshop Resources</h2>
-                <p>Links and materials to help complete exercises and additional information.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe">Download: PuTTY for Windows</a>
-            </div>
-            <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://docs.openshift.com/">OpenShift Documentation</a>
-            </div>
-            <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://github.com/openshift/origin/releases/tag/v3.10.0">OC Command Line Client Downloads</a>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://docs.ansible.com">Ansible Documentation</a>
-            </div>
-            <div class="col-sm-4">
-                <a class="btn btn-secondary btn-block" href="https://docs.ansible.com/ansible/latest/modules/modules_by_category.html">Ansible Module Index</a>
-            </div>
-        </div>
-    </div>
-</section>
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8">
                 <h2>Lab Environments</h2>
-                <p>Each participant will be assigned a 4-node OpenShift 3.10 cluster. The information for each participant is below. Click on your user number for details.</p>
+                <p>Each participant will be assigned a 4-node OpenShift {{ openshift_version }} cluster. The information for each participant is below. Click on your user number for details.</p>
             </div>
         </div>
 
@@ -299,7 +245,10 @@ $("document").ready(function(){
       <strong>Bastion Node</strong><br/>
 {% for host in bastion_node_facts.instances %}
 {% if 'student' ~ number == host.tags.Student %}
-{{ host.public_dns_name }}
+<p>
+SSH Address: {{ host.public_dns_name }}<br/>
+Lab Guide: <a href="http://{{ host.public_dns_name }}:8080">http://{{ host.public_dns_name }}:8080</a>
+</p>
 {% endif %}
 {% endfor %}
       </p>

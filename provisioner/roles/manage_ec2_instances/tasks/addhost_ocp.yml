@@ -30,14 +30,6 @@
       "tag:Workshop_app2": "{{ec2_name_prefix}}-app2"
   register: app2_node_facts
 
-- name: grab facts for db node
-  ec2_instance_facts:
-    region: "{{ ec2_region }}"
-    filters:
-      instance-state-name: running
-      "tag:Workshop_db": "{{ec2_name_prefix}}-db"
-  register: db_node_facts
-
 - name: add hosts to groups (OPENSHIFT MODE)
   add_host:
     name: "{{ item.tags.Name }}"
@@ -52,7 +44,6 @@
     - "{{ infra_node_facts.instances }}"
     - "{{ app1_node_facts.instances }}"
     - "{{ app2_node_facts.instances }}"
-    - "{{ db_node_facts.instances }}"
   changed_when: no
 
 - name: add hosts to master groups (OPENSHIFT MODE)
@@ -61,13 +52,6 @@
     groups: master_nodes
   with_items:
     - "{{ master_node_facts.instances }}"
-
-- name: add hosts to database groups (OPENSHIFT MODE)
-  add_host:
-    name: "{{ item.tags.Name }}"
-    groups: database_nodes
-  with_items:
-    - "{{ db_node_facts.instances }}"
 
 - name: Generate student OpenShift inventories
   template:

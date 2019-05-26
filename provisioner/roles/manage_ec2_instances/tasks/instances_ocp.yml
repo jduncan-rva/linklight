@@ -4,7 +4,6 @@
     infra_node: "{{ ec2_ocp['infra'] }}"
     app1_node: "{{ ec2_ocp['app1'] }}"
     app2_node: "{{ ec2_ocp['app2'] }}"
-    db_node: "{{ ec2_ocp['db'] }}"
   when: not networking
 
 - name: find ami for master
@@ -235,57 +234,3 @@
   with_indexed_items:
     - "{{ app2_output.instance_ids }}"
   when: app2_output.instance_ids is not none
-
-- name: find ami for db node
-  ec2_ami_facts:
-    region: "{{ ec2_region }}"
-    owners: "{{ ec2_instance_types[db_node].owners }}"
-    filters:
-      name: "{{ ec2_instance_types[db_node].filter }}"
-      architecture: "{{ ec2_instance_types[db_node].architecture }}"
-  register: amis
-
-- name: save ami for app1
-  set_fact:
-    db_ami: >
-      {{ amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}
-
-- name: Create EC2 instances for dbnode
-  ec2:
-    assign_public_ip: yes
-    key_name: "{{ ec2_name_prefix }}-key"
-    group: "{{ ec2_security_group }}"
-    instance_type: "{{ ec2_instance_types[db_node].size }}"
-    image: "{{ db_ami.image_id }}"
-    region: "{{ ec2_region }}"
-    exact_count: "{{ student_total }}"
-    count_tag:
-      Workshop_app1: "{{ec2_name_prefix}}-db"
-    wait: "{{ ec2_wait }}"
-    vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
-    volumes:
-      - device_name: /dev/sda1
-        volume_type: gp2
-        volume_size: "{{ ec2_instance_types[app1_node].disk_space }}"
-        delete_on_termination: true
-  register: db_output
-
-- name: Ensure tags are present for dbnode
-  ec2_tag:
-    region: "{{ ec2_region }}"
-    resource: "{{item.1}}"
-    state: present
-    tags:
-      Name: "{{ ec2_name_prefix }}-student{{item.0 + 1}}-db"
-      Workshop_db: "{{ec2_name_prefix}}-db"
-      Workshop: "{{ec2_name_prefix}}"
-      Index: "{{ item[0] }}"
-      Student: "student{{item.0 + 1}}"
-      Username: "{{ linklight_user }}"
-      Info: "Username that provisioned this-> {{ linklight_user }}"
-      Linklight: "This was provisioned through the linklight provisioner"
-      Students: "{{student_total}}"
-      short_name: "db"
-  with_indexed_items:
-    - "{{ db_output.instance_ids }}"
-  when: db_output.instance_ids is not none

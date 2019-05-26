@@ -8,12 +8,64 @@
       - wget
       - sshpass
       - ansible
+      - docker
     state: present
-  when: (openshift_version | string) == "3.11"
   become: yes
+
+- name: start docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
 
 - name: Put student inventory in proper spot
   copy:
     src: ./{{ec2_name_prefix}}/{{ username }}-inventory.txt
     dest: /etc/ansible/hosts
   when: username in inventory_hostname
+
+- name: Check if EPEL repo is already configured.
+  stat:
+    path: "{{ epel_repofile_path }}"
+  register: epel_repofile_result
+
+- name: Install EPEL repo so we can install PIP
+  yum:
+    name:  "{{ epel_repo_url }}"
+    state: present
+  register: result
+  until: 'result.rc == 0'
+  retries: 5
+  delay: 10
+  when: not epel_repofile_result.stat.exists
+
+- name: Import EPEL GPG key.
+  rpm_key:
+    key: "{{ epel_repo_gpg_key_url }}"
+    state: present
+  when: not epel_repofile_result.stat.exists
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: install PIP
+  yum:
+    name: python-pip
+    state: present
+
+- name: install docker-py requirements
+  pip:
+    name: docker-py
+    state: present
+    extra_args: --trusted-host pypi.org --trusted-host files.pythonhosted.org
+
+- name: pull the lab guide image
+  docker_image:
+    name: quay.io/jduncan/operator-workshop-lab-guide-better-together
+    state: present
+
+- name: start the lab guide container
+  docker_container:
+    name: lab_guide
+    image: quay.io/jduncan/operator-workshop-lab-guide-better-together
+    ports:
+      - "8080:8080"
+    restart_policy: always

@@ -56,7 +56,9 @@
     state: present
 
 - name: get public IP for control node
-  uri: http://169.254.169.254/latest/meta-data/public-ipv4
+  uri:
+    url: http://169.254.169.254/latest/meta-data/public-ipv4
+    return_content: yes
   register: pub_ip
 
 - name: create the environment file for doxcker

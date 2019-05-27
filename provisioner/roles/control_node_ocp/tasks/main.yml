@@ -70,6 +70,7 @@
   docker_container:
     name: lab_guide
     image: quay.io/jduncan/operator-workshop-lab-guide-better-together
+    env_file: /tmp/env.list
     ports:
       - "8080:8080"
     restart_policy: always

@@ -55,6 +55,15 @@
     name: quay.io/jduncan/operator-workshop-lab-guide-better-together
     state: present
 
+- name: get public IP for control node
+  uri: http://169.254.169.254/latest/meta-data/public-ipv4
+  register: pub_ip
+
+- name: create the environment file for doxcker
+  template:
+    src: env.list.j2
+    dest: /tmp/env.list
+
 - name: start the lab guide container
   docker_container:
     name: lab_guide

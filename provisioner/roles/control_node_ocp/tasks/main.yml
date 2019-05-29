@@ -9,6 +9,7 @@
       - sshpass
       - ansible
       - docker
+      - tree
     state: present
   become: yes
 

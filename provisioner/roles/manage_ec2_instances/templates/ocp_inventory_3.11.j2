@@ -34,29 +34,11 @@
 {% endif %}
 {% endfor %}
 
-[glusterfs]
-{% for vm in infra_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='["/dev/xvdb"]'
-{% endif %}
-{% endfor %}
-{% for vm in app1_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='["/dev/xvdb"]'
-{% endif %}
-{% endfor %}
-{% for vm in app2_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='["/dev/xvdb"]'
-{% endif %}
-{% endfor %}
-
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
 nodes
 etcd
-glusterfs
 
 [OSEv3:vars]
 # Disable checks that are meant to catch issues early. This is an automated install that
@@ -148,16 +130,16 @@ osm_default_node_selector='node-role.kubernetes.io/compute=true'
 
 # OpenShift Storage Options
 #
-openshift_storage_glusterfs_storageclass=true
-openshift_storage_glusterfs_storageclass_default=true
+# openshift_storage_glusterfs_storageclass=true
+# openshift_storage_glusterfs_storageclass_default=true
 
-openshift_storage_glusterfs_image=registry.redhat.io/rhgs3/rhgs-server-rhel7:v3.11
-openshift_storage_glusterfs_block_image=registry.redhat.io/rhgs3/rhgs-gluster-block-prov-rhel7:v3.11
-openshift_storage_glusterfs_heketi_image=registry.redhat.io/rhgs3/rhgs-volmanager-rhel7:v3.11
-openshift_storage_glusterfs_block_deploy=true
-openshift_storage_glusterfs_block_storageclass=true
-openshift_storage_glusterfs_block_storageclass_default=false
-openshift_storage_glusterfs_block_host_vol_size=15
+# openshift_storage_glusterfs_image=registry.redhat.io/rhgs3/rhgs-server-rhel7:v3.11
+# openshift_storage_glusterfs_block_image=registry.redhat.io/rhgs3/rhgs-gluster-block-prov-rhel7:v3.11
+# openshift_storage_glusterfs_heketi_image=registry.redhat.io/rhgs3/rhgs-volmanager-rhel7:v3.11
+# openshift_storage_glusterfs_block_deploy=true
+# openshift_storage_glusterfs_block_storageclass=true
+# openshift_storage_glusterfs_block_storageclass_default=false
+# openshift_storage_glusterfs_block_host_vol_size=15
 
 # OpenShift Router Options
 #
@@ -195,8 +177,8 @@ openshift_hosted_registry_selector='node-role.kubernetes.io/infra=true'
 #
 # Registry Storage Options
 #
-openshift_hosted_registry_storage_kind=glusterfs
-openshift_hosted_registry_storage_volume_size={{ openshift_registry_volume_size }}Gi
+# glusterfs
+# openshift_hosted_registry_storage_volume_size={{ openshift_registry_volume_size }}Gi
 
 # Metrics deployment
 # See: https://docs.openshift.com/container-platform/latest/install_config/cluster_metrics.html
@@ -217,9 +199,9 @@ openshift_metrics_server_install=true
 # generally enough for up to 1000 pods. Additional volumes can be created
 # manually after the fact and metrics scaled per the docs.
 #
-openshift_metrics_cassandra_storage_type=dynamic
-openshift_metrics_cassandra_pvc_size=10Gi
-openshift_metrics_cassandra_pvc_storage_class_name=glusterfs-storage-block
+# openshift_metrics_cassandra_storage_type=dynamic
+# openshift_metrics_cassandra_pvc_size=10Gi
+# openshift_metrics_cassandra_pvc_storage_class_name=glusterfs-storage-block
 #
 # Other Metrics Options -- Common items you may wish to reconfigure, for the complete
 # list of options please see roles/openshift_metrics/README.md
@@ -237,13 +219,13 @@ openshift_cluster_monitoring_operator_install=true
 # Cluster monitoring configuration variables allow setting the amount of
 # storage requested through PersistentVolumeClaims.
 #
-openshift_cluster_monitoring_operator_prometheus_storage_enabled=true
-openshift_cluster_monitoring_operator_prometheus_storage_class_name=glusterfs-storage-block
-openshift_cluster_monitoring_operator_prometheus_storage_capacity="10Gi"
+# openshift_cluster_monitoring_operator_prometheus_storage_enabled=true
+# openshift_cluster_monitoring_operator_prometheus_storage_class_name=glusterfs-storage-block
+# openshift_cluster_monitoring_operator_prometheus_storage_capacity="10Gi"
 
-openshift_cluster_monitoring_operator_alertmanager_storage_enabled=true
-openshift_cluster_monitoring_operator_alertmanager_storage_class_name=glusterfs-storage-block
-openshift_cluster_monitoring_operator_alertmanager_storage_capacity="10Gi"
+# openshift_cluster_monitoring_operator_alertmanager_storage_enabled=true
+# openshift_cluster_monitoring_operator_alertmanager_storage_class_name=glusterfs-storage-block
+# openshift_cluster_monitoring_operator_alertmanager_storage_capacity="10Gi"
 #
 # Other cluster monitoring options
 #
@@ -256,9 +238,9 @@ openshift_logging_install_logging=true
 #
 # Logging storage config
 #
-openshift_logging_es_pvc_dynamic=true
-openshift_logging_es_pvc_size=10Gi
-openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block
+# openshift_logging_es_pvc_dynamic=true
+# openshift_logging_es_pvc_size=10Gi
+# openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block
 #
 # Other Logging Options -- Common items you may wish to reconfigure, for the complete
 # list of options please see roles/openshift_logging/README.md

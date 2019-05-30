@@ -34,11 +34,19 @@
 {% endif %}
 {% endfor %}
 
+[nfs]
+{% for vm in master_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+{{ vm.private_dns_name }}
+{% endif %}
+{% endfor %}
+
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
 nodes
 etcd
+nfs
 
 [OSEv3:vars]
 # Disable checks that are meant to catch issues early. This is an automated install that

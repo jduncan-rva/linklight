@@ -2,7 +2,7 @@
 - name: Install required packages (3.11)
   yum:
     name:
-      - openshift-ansible
+      - openshift-ansible-{{ openshift_version_minor }}
       - vim-enhanced
       - git
       - wget

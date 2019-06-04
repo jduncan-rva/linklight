@@ -286,13 +286,6 @@ Application Subdomain:<br/>
 {% endif %}
 {% endfor %}
 </p>
-<p><strong>Database Nodes</strong><br/>
-{% for host in db_node_facts.instances %}
-{% if 'student' ~ number == host.tags.Student %}
-{{ host.public_dns_name }}<br/>
-{% endif %}
-{% endfor %}
-</p>
     </div>
   </div>
 {% endfor %}

@@ -35,7 +35,6 @@
     - "{{ master_node_facts.instances }}"
     - "{{ infra_node_facts.instances }}"
     - "{{ app1_node_facts.instances }}"
-    - "{{ app2_node_facts.instances }}"
   changed_when: no
 
 - name: add hosts to master groups (OPENSHIFT MODE)

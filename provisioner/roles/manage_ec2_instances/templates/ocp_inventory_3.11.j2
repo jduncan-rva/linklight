@@ -28,11 +28,6 @@
 {{ vm.private_dns_name }} openshift_node_group_name="node-config-compute"
 {% endif %}
 {% endfor %}
-{% for vm in app2_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} openshift_node_group_name="node-config-compute"
-{% endif %}
-{% endfor %}
 
 [nfs]
 {% for vm in master_node_facts.instances %}

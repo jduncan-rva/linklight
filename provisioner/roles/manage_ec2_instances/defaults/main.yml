@@ -38,8 +38,6 @@ ec2_ocp:
   master: ocp-master
   infra: ocp-master
   app1: ocp-app
-  app2: ocp-app
-  db: rhel7-tower
 
 # Instance types used for lab configurations
 ec2_instance_types:

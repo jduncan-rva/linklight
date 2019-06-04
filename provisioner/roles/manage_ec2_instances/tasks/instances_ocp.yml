@@ -3,7 +3,6 @@
     master_node: "{{ ec2_ocp['master'] }}"
     infra_node: "{{ ec2_ocp['infra'] }}"
     app1_node: "{{ ec2_ocp['app1'] }}"
-    app2_node: "{{ ec2_ocp['app2'] }}"
   when: not networking
 
 - name: find ami for master
@@ -176,17 +175,3 @@
   with_indexed_items:
     - "{{ app1_output.instance_ids }}"
   when: app1_output.instance_ids is not none
-
-- name: find ami for app2
-  ec2_ami_facts:
-    region: "{{ ec2_region }}"
-    owners: "{{ ec2_instance_types[app2_node].owners }}"
-    filters:
-      name: "{{ ec2_instance_types[app2_node].filter }}"
-      architecture: "{{ ec2_instance_types[app2_node].architecture }}"
-  register: amis
-
-- name: save ami for app1
-  set_fact:
-    app2_ami: >
-      {{ amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}

@@ -28,11 +28,6 @@
 {{ vm.private_dns_name }} openshift_node_labels="{'role': 'app'}"
 {% endif %}
 {% endfor %}
-{% for vm in app2_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} openshift_node_labels="{'role': 'app'}"
-{% endif %}
-{% endfor %}
 
 [glusterfs]
 {% for vm in infra_node_facts.instances %}
@@ -41,11 +36,6 @@
 {% endif %}
 {% endfor %}
 {% for vm in app1_node_facts.instances %}
-{% if 'student' + item == vm.tags.Student %}
-{{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
-{% endif %}
-{% endfor %}
-{% for vm in app2_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
 {{ vm.private_dns_name }} glusterfs_devices='[ "/dev/sda2" ]'
 {% endif %}

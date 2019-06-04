@@ -30,22 +30,6 @@
       "tag:Workshop_app1": "{{ec2_name_prefix}}-app1"
   register: app1_node_facts
 
-- name: grab facts for app2 node
-  ec2_instance_facts:
-    region: "{{ ec2_region }}"
-    filters:
-      instance-state-name: running
-      "tag:Workshop_app2": "{{ec2_name_prefix}}-app2"
-  register: app2_node_facts
-
-- name: grab facts for db node
-  ec2_instance_facts:
-    region: "{{ ec2_region }}"
-    filters:
-      instance-state-name: running
-      "tag:Workshop_db": "{{ec2_name_prefix}}-db"
-  register: db_node_facts
-
 - name: create student OpenShift webpage
   template:
     src: ./templates/index_ocp.html.j2

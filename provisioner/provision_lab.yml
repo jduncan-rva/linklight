@@ -60,12 +60,6 @@
   roles:
     - addusers_ocp
 
-- name: Configure Databae nodes for OpenShift workshop
-  hosts: database_nodes
-  become: yes
-  roles:
-    - ocp_workshop_db
-
 - name: Setup Amazon S3 Website for Student Login
   hosts: localhost
   connection: local

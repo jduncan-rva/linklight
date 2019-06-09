@@ -1,0 +1,29 @@
+ec2_region: us-east-1
+ec2_az: us-east-1a
+ec2_name_prefix: WORKSHOP_NAME
+admin_password: ADMIN_PASSWORD
+student_total: 1
+workshop_dns_zone: YOUR_ROUTE53_ZONE
+rhsm_username: YOUR_USERNAME
+rhsm_password: YOUR_PASSWORD
+rhsm_pool: YOUR_RHSM_POOL
+
+### Don't edit below this line
+openshift_version_minor: 3.11.43
+localsecurity: false
+create_login_page: true
+openshift: true
+openshift_version: "3.11"
+cluster_name: "{{ ec2_name_prefix }}"
+openshift_base_domain: "{{ workshop_dns_zone }}"
+openshit_version_minor: 11
+openshift_registry_volume_size: 10
+create_login_page: true
+openshift_users:
+  - username: admin
+    password: "{{ admin_password }}"
+    admin: yes
+  - username: ocp_user1
+    password: "{{ admin_password }}"
+  - username: ocp_user2
+    password: "{{ admin_password }}"

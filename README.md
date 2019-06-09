@@ -2,27 +2,23 @@
 
 ## Overview
 
-Linklight-ocp is based on the [Ansible Linklight Workshop Provisioner](https://github.com/network-automation/linklight). Linklight is an incredibly efficient AWS-based workshop tool created by several members of the Red Hat Ansible team and other contributors. Essentially, we've hacked it up to deploy OpenShift workshops instead of Ansible and Ansible Networking workshops.
+Linklight-ocp is based on the [Ansible Linklight Workshop Provisioner](https://github.com/network-automation/linklight). Linklight is an efficient AWS-based workshop tool created by several members of the Red Hat Ansible team and other contributors. Essentially, we've forked Linklight to deploy OpenShift workshops instead of Ansible and Ansible Networking workshops.
 
 ## Lab Design
 
 Each student is provisioned the following using linklight-ocp:
-* bastion host for deploying OpenShift
-* 4-node OpenShift cluster
-* External database node (primarily for the Dev track of the [])
-
-## Other content
-
-
+* bastion host for deploying OpenShift and exploring Ansible
+* 3-node OpenShift cluster
+* Containerized lab guide deployed on the bastion host on port 8080.
 
 ## Deploying the lab
 
 Deploying linklight-ocp requires:
 
 * AWS account with:
-  * quotas to accommodate `$(STUDENT_COUNT) * 6` instances.
-  * route53 controlled DNS zone
-  * S3 access
+  * quotas to accommodate `$(STUDENT_COUNT) * 4` instances.
+  * route53 controlled DNS zone on the account you'll be using
+  * S3 access for the dynamic web page for student information
 * Basic git knowledge
 
 ### AWS credentials

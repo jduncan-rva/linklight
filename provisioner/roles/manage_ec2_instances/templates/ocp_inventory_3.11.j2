@@ -12,6 +12,7 @@
 {% endif %}
 {% endfor %}
 
+{% if crio == False %}
 [nodes]
 {% for vm in master_node_facts.instances %}
 {% if 'student' + item == vm.tags.Student %}
@@ -28,6 +29,26 @@
 {{ vm.private_dns_name }} openshift_node_group_name="node-config-compute"
 {% endif %}
 {% endfor %}
+{% endif %}
+
+{% if crio == True %}
+[nodes]
+{% for vm in master_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+{{ vm.private_dns_name }} openshift_node_group_name="node-config-master-crio"
+{% endif %}
+{% endfor %}
+{% for vm in infra_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+{{ vm.private_dns_name }} openshift_node_group_name="node-config-infra-crio"
+{% endif %}
+{% endfor %}
+{% for vm in app1_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+{{ vm.private_dns_name }} openshift_node_group_name="node-config-compute-crio"
+{% endif %}
+{% endfor %}
+{% endif %}
 
 [nfs]
 {% for vm in master_node_facts.instances %}
@@ -86,6 +107,12 @@ openshift_master_default_subdomain={{ vm.tags.AppDomain }}
 
 # Debug level for all OpenShift components (Defaults to 2)
 debug_level=2
+
+{% if crio == True %}
+openshift_use_crio=True
+openshift_use_crio_only=False
+openshift_crio_enable_docker_gc=True
+{% endif %}
 
 {% if openshift_version_minor is defined %}
 # Specify an exact container image tag to install or configure.

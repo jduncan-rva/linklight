@@ -7,6 +7,7 @@ workshop_dns_zone: YOUR_ROUTE53_ZONE
 rhsm_username: YOUR_USERNAME
 rhsm_password: YOUR_PASSWORD
 rhsm_pool: YOUR_RHSM_POOL
+crio: True
 
 ### Don't edit below this line
 openshift_version_minor: 3.11.43
